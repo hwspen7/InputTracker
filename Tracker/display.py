@@ -5,12 +5,12 @@ import time
 last_display_time = time.time()
 
 # Store the previous state of the stats
-previous_stats = stats.copy()  # ✅ 记录上一次的统计数据
+previous_stats = stats.copy()
 
 # Function to check if data has changed
 def has_data_changed():
     global previous_stats
-    return any(previous_stats[key] != stats[key] for key in stats)  # ✅ 只要有一个值不同就返回 True
+    return any(previous_stats[key] != stats[key] for key in stats)
 
 # Function to update the terminal display
 def update_display():
@@ -18,7 +18,7 @@ def update_display():
     current_time = time.time()
 
     # Only update if data has changed
-    if has_data_changed():  # ✅ 只有数据变化才更新
+    if has_data_changed():
         mouse_distance_str = f"{round(stats['mouse_distance'], 2)} pixels ({mouse_distance_inches()})"
         scroll_distance_str = f"{round(stats['scroll_distance'], 2)} pixels ({scroll_distance_inches()})"
 
@@ -28,9 +28,8 @@ def update_display():
         print(f"\nScroll Distance: {scroll_distance_str}", end="")
         print(f"\nKey Presses: {stats['key_presses']}", end="\n")
 
-        last_display_time = current_time  # ✅ 只在数据变化时更新时间
-        previous_stats = stats.copy()  # ✅ 更新上一次的统计数据
-
+        last_display_time = current_time
+        previous_stats = stats.copy()
 # Convert pixel distances to inches
 def mouse_distance_inches():
     return f"{round(stats['mouse_distance'] / DPI, 2)} in"
